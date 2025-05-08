@@ -1,0 +1,7 @@
+site_name: DB Schema Docs
+theme:
+  name: material
+
+plugins:
+  - search
+  - awesome-pages
