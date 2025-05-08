@@ -1,6 +1,7 @@
 site_name: DB Schema Docs
 theme:
   name: material
+docs_dir: ./test
 
 plugins:
   - search
