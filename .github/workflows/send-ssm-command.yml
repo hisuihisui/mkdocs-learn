@@ -36,7 +36,7 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
               "echo '"$MY_SECRET_VALUE_ON_EC2"' > /tmp/actions.log",
-              "DBPW=$(aws secretsmanager get-secret-value --secret-id test-secret-tbls-mkdocs-20250511 | jq ".SecretString" | jq -r . | jq -r .DBPW)",
+              "DBPW=$(aws secretsmanager get-secret-value --secret-id test-secret-tbls-mkdocs-20250511 | jq '".SecretString"' | jq -r . | jq -r .DBPW)",
               "echo $DBPW > /tmp/dbpw.log"
             ]' \
             --comment "GitHub Actions: Execute Fixed Script" \
