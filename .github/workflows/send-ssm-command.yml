@@ -77,8 +77,8 @@ jobs:
             --query "{StandardOutputContent:StandardOutputContent, StandardErrorContent:StandardErrorContent, Status:Status}" \
             --output json)
           echo $COMMAND_INVOCATION
-          stderr=$(echo "$COMMAND_INVOCATION" | jq -r .StandardErrorContent')
-          status=$(echo "$COMMAND_INVOCATION" | jq -r .Status')
+          stderr=$(echo "$COMMAND_INVOCATION" | jq -r '.StandardErrorContent')
+          status=$(echo "$COMMAND_INVOCATION" | jq -r '.Status')
           echo $stderr
           echo "Command Status: $status"
           if [ $status = "Failed" ]; then
