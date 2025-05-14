@@ -81,8 +81,8 @@ jobs:
           status=$(echo "$COMMAND_INVOCATION" | jq -r .Status')
           echo $stderr
           echo "Command Status: $status"
-          if [ $stdout = "failed" ]; then
-              echo "ERROR: $status"
+          if [ $status = "Failed" ]; then
+              echo "ERROR: $stderr"
               exit 1
           fi
 
