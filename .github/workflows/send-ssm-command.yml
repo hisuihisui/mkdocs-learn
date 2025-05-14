@@ -50,7 +50,6 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
               "echo '"$MY_SECRET_VALUE_ON_EC2"' > /tmp/actions.log",
-              exit 1,
             ]' \
             --comment "GitHub Actions: Execute Fixed Script" \
             --query "Command.CommandId" \
@@ -76,11 +75,8 @@ jobs:
             --instance-id "${{ env.INSTANCE_ID }}" \
             --query "{StandardOutputContent:StandardOutputContent, StandardErrorContent:StandardErrorContent, Status:Status}" \
             --output json)
-          echo $COMMAND_INVOCATION
           stderr=$(echo "$COMMAND_INVOCATION" | jq -r '.StandardErrorContent')
           status=$(echo "$COMMAND_INVOCATION" | jq -r '.Status')
-          echo $stderr
-          echo "Command Status: $status"
           if [ $status = "Failed" ]; then
               echo "ERROR: $stderr"
               exit 1
