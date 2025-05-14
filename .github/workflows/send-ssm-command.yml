@@ -76,6 +76,7 @@ jobs:
             --instance-id "${{ env.INSTANCE_ID }}" \
             --query "{StandardOutputContent:StandardOutputContent, StandardErrorContent:StandardErrorContent, Status:Status}" \
             --output json | jq -r '.')
+          echo "Command Invocation: $COMMAND_INVOCATION"
           # 'echo "Full invocation JSON: \(.)" >&2;
           # if .Status == "Failed" then
           #     ("::error::SSM Command Status is Failed. Details: \(.)" | stderr),
