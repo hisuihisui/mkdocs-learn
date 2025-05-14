@@ -81,7 +81,7 @@ jobs:
           echo $stdout
           echo $stderr
           echo "Command Status: $status"
-          if $stdout == "failed" then
+          if [ $stdout = "failed" ]; then
               echo "ERROR: $status"
               exit 1
           fi
