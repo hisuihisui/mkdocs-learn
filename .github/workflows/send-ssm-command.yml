@@ -76,15 +76,14 @@ jobs:
             --instance-id "${{ env.INSTANCE_ID }}" \
             --query "{StandardOutputContent:StandardOutputContent, StandardErrorContent:StandardErrorContent, Status:Status}" \
             --output json | jq -r '.')
+          echo $COMMAND_INVOCATION
           read stdout stderr status <<< $( echo "$COMMAND_INVOCATION" | jq -r '.StandardOutputContent, .StandardErrorContent, .Status' | xargs )
           echo $stdout
           echo $stderr
           echo "Command Status: $status"
-          # if .Status == "Failed" then
-          #     ("::error::SSM Command Status is Failed. Details: \(.)" | stderr),
-          #     halt_error(1)
-          # else
-          #   .Status
-          # end'
+          if $stdout == "failed" then
+              echo "ERROR: $status"
+              exit 1
+          fi
 
-          # echo "SSM Command Status was not Failed."
+          echo "SSM Command Status was Success."
